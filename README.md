@@ -1,5 +1,4 @@
-[Godoc here](https://godoc.org/github.com/koepkeca/pbkdf2pass)
-
+[![GoDoc](https://godoc.org/github.com/koepkeca/pbkdf2pass?status.svg)](https://godoc.org/github.com/koepkeca/pbkdf2pass)
 [![Go Report Card](https://goreportcard.com/badge/github.com/koepkeca/pbkdf2pass)](https://goreportcard.com/report/github.com/koepkeca/pbkdf2pass)
 
 # Overview
