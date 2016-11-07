@@ -1,7 +1,7 @@
-// Package pbkdf2_pass is a wrapper for using pbkdf2 encoded passwords.
-// It is based on the article "Salted Password Hashing - Doing it Right"
-// written by Defuse Security (http://crackstation.net/hashing-security.htm)
-// This provides functionality to store a salted keyed password.
+//Package pbkdf2pass is a wrapper for using pbkdf2 encoded passwords.
+//It is based on the article "Salted Password Hashing - Doing it Right"
+//written by Defuse Security (http://crackstation.net/hashing-security.htm)
+//This provides functionality to store a salted keyed password.
 package pbkdf2pass
 
 import (

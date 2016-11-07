@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/koepkeca/pbkdf2_pass"
+	"github.com/koepkeca/pbkdf2pass"
 )
 
 //ENCODED_STRING is a pre-encoded version of the string Testing1234
@@ -13,7 +13,7 @@ const (
 )
 
 func main() {
-	p, e := pbkdf2_pass.FromString(ENCODED_STRING)
+	p, e := pbkdf2pass.FromString(ENCODED_STRING)
 	if e != nil {
 		log.Fatal("invalid encoded string")
 	}

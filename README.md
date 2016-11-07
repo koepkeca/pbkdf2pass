@@ -1,15 +1,17 @@
-[Godoc here](https://godoc.org/github.com/koepkeca/pbkdf2_pass)
+[Godoc here](https://godoc.org/github.com/koepkeca/pbkdf2pass)
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/koepkeca/pbkdf2pass)](https://goreportcard.com/report/github.com/koepkeca/pbkdf2pass)
 
 # Overview
 
-pbkdf2_pass is a library written in go that provides a wrapper for encoding passwords. This is useful for storing password hashes in databases or flat files for users in a system. It is intended to be moderately more secure than simple MD5 or SHA1 hashes which can be quickly decoded using Rainbow Tables or other methods. This library is based off of the work by Defuse Security and [can be found here](https://crackstation.net/hashing-security.htm).
+pbkdf2pass is a library written in go that provides a wrapper for encoding passwords. This is useful for storing password hashes in databases or flat files for users in a system. It is intended to be moderately more secure than simple MD5 or SHA1 hashes which can be quickly decoded using Rainbow Tables or other methods. This library is based off of the work by Defuse Security and [can be found here](https://crackstation.net/hashing-security.htm).
 
 # Installation
 
 To install the library you just do a go get:
 
 ```
-go get github.com/koepkeca/pbkdf2_pass
+go get github.com/koepkeca/pbkdf2pass
 ```
 
 # Data Format
@@ -31,14 +33,14 @@ where:
 To generate a new encoded password you will need to provide some configuration information. The default values are set as constants and may be changed at any time without corrupting existing hashes. You can also override the defaults by setting the new value in the configuration structure. For example, if you wanted to use SHA384 encoding with an iteration count of 4000 just create a Config struct as follows:
 
 ```
-c := pbkdf2_pass.Config{Algo:"sha384",IterLen:4000}
+c := pbkdf2pass.Config{Algo:"sha384",IterLen:4000}
 ```
 ## Creating a password hash
 
 To encode a string using the parameters setup in your config you call the Encode method with the string you would like to encode, this returns a Password structure containing the encoded data.
 
 ```
-c := pbkdf2_pass.Config{}
+c := pbkdf2pass.Config{}
 p, e := c.Encode("Test123")
 if e != nil {
 	log.Fatal(e)
@@ -69,7 +71,7 @@ There are two steps you need to perform to validate a challenge. The following e
 //assume key is a pre-encoded string (see above) and challenge is a 
 //plain-text string entered by a user (this would be the password we are comparing against)
 
-c := pbkdf2_pass.Config{}
+c := pbkdf2pass.Config{}
 encKey, err := c.FromString(key)
 if err != nil {
     //If there is an error decoding the key, you need to handle it here
@@ -80,7 +82,7 @@ if err != nil {
 isValidPass := encKey.Validate(challenge)
 //isValidPass now is true if the password matches, false if it does not
 ```
-Complete coded examples are included in the example directory and include a basic [encoding](https://github.com/koepkeca/pbkdf2_pass/blob/master/example/encode.go) and [decoding](https://github.com/koepkeca/pbkdf2_pass/blob/master/example/decode.go) example.
+Complete coded examples are included in the example directory and include a basic [encoding](https://github.com/koepkeca/pbkdf2pass/blob/master/example/encode.go) and [decoding](https://github.com/koepkeca/pbkdf2pass/blob/master/example/decode.go) example.
 
 
 

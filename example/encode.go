@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/koepkeca/pbkdf2_pass"
+	"github.com/koepkeca/pbkdf2pass"
 )
 
 func main() {
-	c := pbkdf2_pass.Config{}
+	c := pbkdf2pass.Config{}
 	p, e := c.Encode("Testing1234")
 	if e != nil {
 		log.Fatal(e)
