@@ -81,7 +81,7 @@ if err != nil {
 isValidPass := encKey.Validate(challenge)
 //isValidPass now is true if the password matches, false if it does not
 ```
-Complete coded examples are included in the example directory and include a basic [encoding](https://github.com/koepkeca/pbkdf2pass/blob/master/example/encode.go) and [decoding](https://github.com/koepkeca/pbkdf2pass/blob/master/example/decode.go) example.
+Complete coded examples are included in the example directory and include a basic [encoding](https://github.com/koepkeca/pbkdf2pass/blob/v0/example/encode.go) and [decoding](https://github.com/koepkeca/pbkdf2pass/blob/v0/example/decode.go) example.
 
 
 
