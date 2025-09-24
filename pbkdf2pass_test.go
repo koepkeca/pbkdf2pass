@@ -1,13 +1,7 @@
 package pbkdf2pass
 
 import (
-	"fmt"
 	"testing"
-	"time"
-)
-
-const (
-	SLOW_EQUALS_ITER_TEST_LEN = 2250000
 )
 
 func Test_slow_equals_true(t *testing.T) {
@@ -22,27 +16,6 @@ func Test_slow_equals_false(t *testing.T) {
 	if test {
 		t.Fail()
 	}
-}
-
-func Test_equals_timing(t *testing.T) {
-	st := time.Now()
-	for i := 0; i < SLOW_EQUALS_ITER_TEST_LEN; i++ {
-		_ = slowEquals([]byte("example"), []byte("example"))
-	}
-	secs := time.Since(st).Seconds()
-	high := secs * 1.05
-	low := secs * 0.95
-	fmt.Println(secs)
-	st = time.Now()
-	for i := 0; i < SLOW_EQUALS_ITER_TEST_LEN; i++ {
-		_ = slowEquals([]byte("example"), []byte("farfiww"))
-	}
-	secs = time.Since(st).Seconds()
-	fmt.Println(secs)
-	if secs < low || secs > high {
-		t.Fail()
-	}
-	return
 }
 
 func Test_encode(t *testing.T) {

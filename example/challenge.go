@@ -7,7 +7,7 @@ import (
 	"github.com/koepkeca/pbkdf2pass"
 )
 
-//ENCODED_STRING is a pre-encoded version of the string Testing1234
+// ENCODED_STRING is a pre-encoded version of the string Testing1234
 const (
 	ENCODED_STRING = "sha256:1000:ZrKNvl0eIWr6GNtBYDCSdMOjQvchBeBZ:NWLjFJRWx6opWqCultjr7XvvLBjYzMRN"
 )

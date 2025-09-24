@@ -1,7 +1,7 @@
-//Package pbkdf2pass is a wrapper for using pbkdf2 encoded passwords.
-//It is based on the article "Salted Password Hashing - Doing it Right"
-//written by Defuse Security (http://crackstation.net/hashing-security.htm)
-//This provides functionality to store a salted keyed password.
+// Package pbkdf2pass is a wrapper for using pbkdf2 encoded passwords.
+// It is based on the article "Salted Password Hashing - Doing it Right"
+// written by Defuse Security (http://crackstation.net/hashing-security.htm)
+// This provides functionality to store a salted keyed password.
 package pbkdf2pass
 
 import (
@@ -9,6 +9,7 @@ import (
 	"crypto/sha1"
 	"crypto/sha256"
 	"crypto/sha512"
+	"crypto/subtle"
 	"encoding/base64"
 	"fmt"
 	"hash"
@@ -29,9 +30,9 @@ const (
 // This map stores the hashing functions
 var hashes map[string]func() hash.Hash
 
-//A Config contains the basic configuration for encoding
-//The Algo must be a valid key in the hashes map
-//Empty Salts will be generated upon Encoding
+// A Config contains the basic configuration for encoding
+// The Algo must be a valid key in the hashes map
+// Empty Salts will be generated upon Encoding
 type Config struct {
 	Algo    string
 	Salt    []byte
@@ -40,8 +41,8 @@ type Config struct {
 	SaltLen int
 }
 
-//Encode encodes a string using the configuration in c
-//It returns a Password structure
+// Encode encodes a string using the configuration in c
+// It returns a Password structure
 func (c Config) Encode(s string) (p Password, e error) {
 	if c.Salt == nil {
 		sl := DEFAULT_SALT_LEN
@@ -72,10 +73,10 @@ func (c Config) Encode(s string) (p Password, e error) {
 	return
 }
 
-//Password contains the password data
-//EncodedPass and Salt are the base64-Encoded values, if you
-//intend to work with the Raw Bytes, you MUST decode the values
-//to get the raw bytes.
+// Password contains the password data
+// EncodedPass and Salt are the base64-Encoded values, if you
+// intend to work with the Raw Bytes, you MUST decode the values
+// to get the raw bytes.
 type Password struct {
 	HashType    string
 	EncodedPass []byte
@@ -116,7 +117,7 @@ func (p Password) Validate(s string) (v bool) {
 	return slowEquals(pDec, cDec)
 }
 
-//FromString takes an encoded pasword structure and creates a Password
+// FromString takes an encoded pasword structure and creates a Password
 // e returns any decoding errors
 func FromString(s string) (p Password, e error) {
 	d := strings.Split(s, ":")
@@ -140,8 +141,8 @@ func FromString(s string) (p Password, e error) {
 	return
 }
 
-//init sets the hashes map
-//if the spec adds new hashes later, add them here
+// init sets the hashes map
+// if the spec adds new hashes later, add them here
 func init() {
 	hashes = make(map[string]func() hash.Hash)
 	hashes["sha1"] = sha1.New
@@ -155,11 +156,7 @@ func init() {
 // slowEquals implements a "length-constant" time byte checker
 // you can read more at https://crackstation.net/hashing-security.htm
 func slowEquals(a []byte, b []byte) bool {
-	diff := byte(len(a) ^ len(b))
-	for i := 0; i < len(a) && i < len(b); i++ {
-		diff |= a[i] ^ b[i]
-	}
-	return diff == 0
+	return subtle.ConstantTimeCompare(a, b) == 1
 }
 
 // genRandBytes generates n random bytes using crypto/rand
