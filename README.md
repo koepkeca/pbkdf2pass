@@ -3,7 +3,7 @@
 
 # Overview
 
-pbkdf2pass is a library written in go that provides a wrapper for encoding passwords. This is useful for storing password hashes in databases or flat files for users in a system. It is intended to be moderately more secure than simple MD5 or SHA1 hashes which can be quickly decoded using Rainbow Tables or other methods. This library is based off of the work by Defuse Security and [can be found here](https://crackstation.net/hashing-security.htm).
+pbkdf2pass is a library written in go that provides a wrapper for encoding passwords. This is useful for storing password hashes in databases or flat files for users in a system. It is intended to be moderately more secure than simple MD5 or SHA1 hashes which can be quickly decoded using Rainbow Tables or other methods. This library is based off of the work by Defuse Security and [can be found here](https://crackstation.net/hashing-security.htm). This library now also uses the Go Standard Library which properly implements slow_equals and can be [reviewed here.](https://github.com/golang/go/blob/d7a38adf4c81f0fa83203e37844192182b22680a/src/crypto/internal/fips140/subtle/constant_time.go)
 
 # Installation
 
